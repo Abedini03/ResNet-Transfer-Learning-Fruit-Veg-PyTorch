@@ -10,7 +10,7 @@ This project implements a deep learning model to classify images of **fruits and
 - **PyTorch (Torchvision, Torch)**
 - **ResNet-18** (Pre-trained on ImageNet)
 - **Kaggle Fruits & Vegetables Dataset**
-- **Jupyter Notebook / Google Colab**
+- **Jupyter Notebook**
 
 ---
 
