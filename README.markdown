@@ -1,11 +1,11 @@
-# 🍎 Fruits & Vegetables Image Classification using ResNet and PyTorch
+# Fruits & Vegetables Image Classification using ResNet and PyTorch
 
-## 📌 Project Overview  
+## Project Overview  
 This project implements a deep learning model to classify images of **fruits and vegetables** using **transfer learning** with a **pre-trained ResNet model**. The dataset is sourced from **Kaggle**, and the model is trained and validated using PyTorch. Finally, the model is tested with an image **outside the dataset** to evaluate real-world performance.
 
 ---
 
-## 🔧 Technologies Used  
+## Technologies Used  
 - **Python**
 - **PyTorch (Torchvision, Torch)**
 - **ResNet-18** (Pre-trained on ImageNet)
@@ -14,7 +14,7 @@ This project implements a deep learning model to classify images of **fruits and
 
 ---
 
-## 📂 Dataset  
+## Dataset  
 The dataset is structured as follows:
 
 ```
@@ -37,7 +37,7 @@ Each subfolder corresponds to a class label (e.g., apple, banana, carrot, etc.).
 
 ---
 
-## 🔄 Data Preprocessing and Augmentation
+## Data Preprocessing and Augmentation
 
 ```python
 from torchvision import transforms
@@ -67,12 +67,12 @@ data_transfomrs = {
 }
 ```
 
-### 🔍 Explanation
+### Explanation
 - **Resizing/Cropping**: Ensures all input images are uniform (224×224).
 - **Normalization**: Matches ImageNet preprocessing.
 - **Augmentation (train only)**: Adds diversity to training data.
 
-### 🧹 Data Loading
+### Data Loading
 ```python
 from torchvision import datasets
 from torch.utils.data import DataLoader
@@ -88,12 +88,12 @@ dataloaders = {
 class_names = image_datasets['train'].classes
 ```
 
-### 🖥️ Device Setup
+### Device Setup
 ```python
 device = "cuda" if torch.cuda.is_available() else "cpu"
 ```
 
-### 🧠 Model Setup: Transfer Learning with ResNet
+### Model Setup: Transfer Learning with ResNet
 ```python
 from torchvision import models
 import torch.nn as nn
@@ -107,12 +107,12 @@ model_ft.fc = nn.Linear(num_ftrs, len(class_names))
 model_ft = model_ft.to(device)
 ```
 
-### 🔍 Explanation
+### Explanation
 - A pretrained **ResNet18** is used as the base model.
 - Unlike some transfer learning cases, **all layers are trainable**, not frozen.
 - The final fully connected layer is replaced to match the number of fruit/vegetable classes.
 
-### ⚙️ Loss Function and Optimizer
+### Loss Function and Optimizer
 ```python
 import torch.optim as optim
 
@@ -123,7 +123,7 @@ optimizer = optim.SGD(model_ft.parameters(), lr=0.001, momentum=0.9)
 - All model parameters are optimized (not just the final layer).
 - **CrossEntropyLoss** is used for multi-class classification.
 
-### 🧠 Training Loop
+### Training Loop
 ```python
 def train_model(model, criterion, optimizer, num_epochs=25):
     ...
@@ -133,7 +133,7 @@ def train_model(model, criterion, optimizer, num_epochs=25):
 - Tracks best accuracy and loss.
 - Updates weights using the optimizer after each batch.
 
-### 🖼️ Inference on New Image (Not in Dataset)
+### Inference on New Image (Not in Dataset)
 ```python
 from PIL import Image
 from torchvision import transforms
@@ -164,28 +164,17 @@ print("Predicted class:", class_names[pred.item()])
 
 ---
 
-## ✅ Results
+## Results
 - The model achieved **accurate classification** of fruits and vegetables in the test set.
 - It successfully **generalized** to a real-world image outside the dataset.
 - Full training was performed (no frozen layers), allowing deeper adaptation.
 
 ---
 
-## 📈 Summary
+## Summary
 | Feature                   | Used |
 |---------------------------|------|
 | Pretrained CNN            | ✅   |
 | Transfer Learning         | ✅   |
 | Augmentation              | ✅   |
 | Custom Inference          | ✅   |
-| Frozen Layers             | ❌   |
-| Learning Rate Scheduling  | ❌   |
-| PyTorch                   | ✅   |
-
----
-
-## 📚 What You Learned
-- How to apply **transfer learning** using ResNet in PyTorch
-- How to keep **all layers trainable** for fine-tuning
-- How to properly **preprocess images** for pretrained models
-- How to run **predictions on unseen images** using your trained model
