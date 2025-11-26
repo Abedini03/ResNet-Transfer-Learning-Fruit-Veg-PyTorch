@@ -3,6 +3,8 @@
 ## Project Overview  
 This project implements a deep learning model to classify images of **fruits and vegetables** using **transfer learning** with a **pre-trained ResNet model**. The dataset is sourced from **Kaggle**, and the model is trained and validated using PyTorch. Finally, the model is tested with an image **outside the dataset** to evaluate real-world performance.
 
+![image](image.png)
+
 ---
 
 ## Technologies Used  
